@@ -51,26 +51,6 @@ public class Matriz {
 		this.matrizInt = matrizInt;
 	}
 
-	public void showMatriz() {
-		if (matrizDouble != null) {
-			for (int i = 0; i < getNumberRows(); i++) {
-				for (int j = 0; j < getNumberColumns(); j++) {
-					System.out.print(matrizDouble[i][j] + "   ");
-				}
-				System.out.println();
-			}
-		} else {
-			if (matrizInt != null) {
-				for (int i = 0; i < getNumberRows(); i++) {
-					for (int j = 0; j < getNumberColumns(); j++) {
-						System.out.print(matrizInt[i][j] + "   ");
-					}
-					System.out.println();
-				}
-			}
-		}
-
-	}
 
 	public void showMatriz(double[][] matriz) {
 		for (int i = 0; i < matriz.length; i++) {
@@ -79,6 +59,17 @@ public class Matriz {
 			}
 			System.out.println();
 		}
+	}
+
+	public double[][] transposedMatriz(double[][] matriz) {
+
+		double[][] transposedResult = new double[getMatrizDouble()[0].length][getMatrizDouble().length];
+		for (int i = 0; i < matriz.length; i++) {
+			for (int j = 0; j < matriz[i].length; j++) {
+				transposedResult[j][i] = matriz[i][j];
+			}
+		}
+		return transposedResult;
 	}
 
 
