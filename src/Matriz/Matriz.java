@@ -4,71 +4,22 @@ import java.text.DecimalFormat;
 
 public class Matriz {
 
-	int numberRows;
-	int numberColumns;
-	double[][] matrizDouble = new double[numberRows][numberColumns];
-	int[][] matrizInt = new int[numberRows][numberColumns];
 
-	public Matriz(int numberRows, int numberColumns, double[][] matrizDouble) {
-		this.numberRows = numberRows;
-		this.numberColumns = numberColumns;
-		this.matrizDouble = matrizDouble;
-	}
-
-	public Matriz(int numberRows, int numberColumns, int[][] matrizInt) {
-		this.numberRows = numberRows;
-		this.numberColumns = numberColumns;
-		this.matrizInt = matrizInt;
-	}
 
 	public Matriz() {
 	}
 
-	public int getNumberRows() {
-		return numberRows;
-	}
-
-	public void setNumberRows(int numberRows) {
-		this.numberRows = numberRows;
-	}
-
-	public int getNumberColumns() {
-		return numberColumns;
-	}
-
-	public void setNumberColumns(int numberColumns) {
-		this.numberColumns = numberColumns;
-	}
-
-	public double[][] getMatrizDouble() {
-		return matrizDouble;
-	}
-
-	public void setMatrizDouble(double[][] matrizDouble) {
-		this.matrizDouble = matrizDouble;
-	}
-
-	public int[][] getMatrizInt() {
-		return matrizInt;
-	}
-
-	public void setMatrizInt(int[][] matrizInt) {
-		this.matrizInt = matrizInt;
-	}
-
-
 	public void mostrarMatriz(double[][] matriz) {
 		for (int i = 0; i < matriz.length; i++) {
 			for (int j = 0; j < matriz[0].length; j++) {
-				DecimalFormat formato1 = new DecimalFormat("0.00");
-				System.out.print(formato1.format(matriz[i][j]) + "   ");			}
+				System.out.print((matriz[i][j]) + "   ");			}
 			System.out.println();
 		}
 	}
 
 	public double[][] transpuestaMatriz(double[][] matriz) {
 
-		double[][] transposedResult = new double[getMatrizDouble()[0].length][getMatrizDouble().length];
+		double[][] transposedResult = new double[matriz[0].length][matriz.length];
 		for (int i = 0; i < matriz.length; i++) {
 			for (int j = 0; j < matriz[i].length; j++) {
 				transposedResult[j][i] = matriz[i][j];
@@ -151,7 +102,6 @@ public class Matriz {
 //			mostrarMatriz(A1);
 //			System.out.println(Q1);
 //			mostrarMatriz(B1);
-//
 //			System.out.println("Matriz Bn-1 es: ");
 //			mostrarMatriz(Bn_1);
 		}
@@ -167,7 +117,7 @@ public class Matriz {
 		return Bn;
 	}
 
-	private double[][] QxI(double Q,double[][] identidad){
+	public double[][] QxI(double Q,double[][] identidad){
 		double[][] QxI=new double[identidad.length][identidad.length];
 		for (int i=0;i<identidad.length;i++){
 			for (int j=0;j<identidad[0].length;j++){
@@ -216,7 +166,6 @@ public class Matriz {
 		return ceros;
 	}
 
-
 	public double[][] restaMatrices(double[][] matriz,double[][] matriz2){
 		double[][] resultado=new double[matriz.length][matriz[0].length];
 		for (int i=0;i<resultado.length;i++){
@@ -226,7 +175,5 @@ public class Matriz {
 		}
 		return resultado;
 	}
-
-
 
 }
