@@ -1,10 +1,6 @@
-package Matriz;
-
-import java.text.DecimalFormat;
+package Matematicas;
 
 public class Matriz {
-
-
 
 	public Matriz() {
 	}
@@ -16,6 +12,27 @@ public class Matriz {
 			System.out.println();
 		}
 	}
+
+	public void mostrarMatrizString(String[][] matriz) {
+		for (int i = 0; i < matriz.length; i++) {
+			for (int j = 0; j < matriz[0].length; j++) {
+				System.out.print((matriz[i][j]) + "   ");			}
+			System.out.println();
+		}
+	}
+
+	public void mostrarMatrizVectorDouble(double[] vector) {
+		for (int i = 0; i < vector.length; i++) {
+				System.out.println((vector[i]) + "   ");
+		}
+	}
+
+	public void mostrarMatrizVectorDouble(int[] vector){
+		for (int i = 0; i < vector.length; i++){
+			System.out.println((vector[i]) + "   ");
+		}
+	}
+
 
 	public double[][] transpuestaMatriz(double[][] matriz) {
 
