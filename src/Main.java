@@ -57,10 +57,6 @@ public class Main {
 //        }else {
 //            System.out.println("Se acepta H0");
 //        }
-//
-
-
-
 
         double[][] y ={{20},{27},{22},{24},{28},{33},{40},{42},{48},{52},{50},{47},{58},{67},{77},{73},{72},{80},{83},{80},{90}};
 //        double[][] deltaY=modelado.deltaY(y);
@@ -73,9 +69,6 @@ public class Main {
         matriz.mostrarMatriz(y_n);
         matriz.mostrarMatriz(y_t_n);
         matriz.mostrarMatriz(modelado.regresionLineal(y_n,y_t_n));
-        //modelado.regresionLineal(deltaY,)
 
-        //int[] x ={20,27,22,24,28,33,40,42,48,52,50,47,58,67,77,73,72,80,83,80,90};
-       //matriz.mostrarMatrizVectorDouble(modelado.regresionLineal(deltaY,Y_1));
     }
 }
