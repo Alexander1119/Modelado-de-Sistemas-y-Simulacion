@@ -6,9 +6,15 @@ public class Matriz {
 	}
 
 	public void mostrarMatriz(double[][] matriz) {
-		for (int i = 0; i < matriz.length; i++) {
-			for (int j = 0; j < matriz[0].length; j++) {
-				System.out.print((matriz[i][j]) + "   ");			}
+		for (int i=0; i < matriz.length; i++)
+		{
+			System.out.print("|");
+			for (int j=0; j < matriz[i].length; j++)
+			{
+				String value = String.format("%10s", matriz[i][j]);
+				System.out.print(" " + value + " ");
+			}
+			System.out.print("|");
 			System.out.println();
 		}
 	}
@@ -192,5 +198,146 @@ public class Matriz {
 		}
 		return resultado;
 	}
+
+
+	public  double[][] inversa(double a[][])         {
+		//Cantidad de filas y columnas: Matriz cuadrada
+		int n = a.length;
+
+
+		double x[][] = new double[n][n];
+		double identidad[][] = new double[n][n];
+
+		int index[] = new int[n];
+
+		//Matriz identidad
+		for (int i=0; i<n; ++i)
+		{
+			identidad[i][i] = 1;
+		}
+
+		// Transforma la matriz en un triángulo superior.
+
+		gaussian(a, index);
+
+		// Actualice la matriz b [i] [j] con las relaciones almacenadas
+		for (int i=0; i<n-1; ++i)
+		{
+			for (int j=i+1; j<n; ++j)
+			{
+				for (int k=0; k<n; ++k)
+				{
+					identidad[index[j]][k]-= a[index[j]][i]*identidad[index[i]][k];
+				}
+			}
+		}
+
+
+		// Realizar sustituciones hacia atrás.
+		for (int i=0; i<n; ++i)             {
+			x[n-1][i] = identidad[index[n-1]][i]/a[index[n-1]][n-1];
+			for (int j=n-2; j>=0; --j)
+			{
+				x[j][i] = identidad[index[j]][i];
+				for (int k=j+1; k<n; ++k)
+				{
+					x[j][i] -= a[index[j]][k]*x[k][i];
+				}
+				x[j][i] /= a[index[j]][j];
+			}
+		}
+		return x;
+	}
+
+
+	public  void gaussian(double a[][], int index[])  {
+
+		int n = index.length;
+		double c[] = new double[n];
+
+
+		// Inicializar el índice
+		for (int i=0; i<n; i++)
+		{
+			index[i] = i;
+
+		}
+
+		// Encuentra los factores de reescalamiento, uno de cada fila
+		for (int i=0; i<n; i++) {
+			double c1 = 0;
+			for (int j=0; j<n; j++) {
+
+				double c0 = Math.abs(a[i][j]);
+				if (c0 > c1) {
+					c1 = c0;
+				}
+			}
+			c[i] = c1;
+		}
+
+		// Busca el elemento pivotante de cada columna.
+		int k = 0;
+		for (int j=0; j<n-1; j++) {
+
+			double pi1 = 0;
+			for (int i=j; i<n; i++) {
+
+				double pi0 = Math.abs(a[index[i]][j]);
+				pi0 /= c[index[i]];
+				if (pi0 > pi1) {
+					pi1 = pi0;
+					k = i;
+				}
+			}
+
+			// Intercambiar filas según el orden de giro.
+			int itmp = index[j];
+			index[j] = index[k];
+			index[k] = itmp;
+			for (int i=j+1; i<n; i++) {
+
+				double pj = a[index[i]][j]/a[index[j]][j];
+
+				// Registrar las relaciones de giro por debajo de la diagonal
+				a[index[i]][j] = pj;
+
+				// Modificar otros elementos en consecuencia.
+				for (int l=j+1; l<n; l++)
+				{
+					a[index[i]][l] -= pj*a[index[j]][l];
+
+				}
+			}
+		}
+	}
+
+
+
+	public double[][] agregarUnDatoACola(double[][] matrizInicial, double datoAgregar){
+		double[][] datosfinales=new double[matrizInicial.length+1][1];
+		for (int i=0;i<datosfinales.length;i++){
+			if (i<matrizInicial.length){
+				datosfinales[i][0]=matrizInicial[i][0];
+			}if (i==matrizInicial.length){
+				datosfinales[i][0]=datoAgregar;
+			}
+		}
+		return datosfinales;
+	}
+	public double[][] agregarColaMatriz(double[][] matrizInicial, double[][] matrizAagregar){
+		double[][] datosfinales=new double[matrizInicial.length+matrizAagregar.length][1];
+		for (int i=0;i<datosfinales.length;i++){
+			if (i<matrizInicial.length){
+				datosfinales[i][0]=matrizInicial[i][0];
+			}if (i>=matrizInicial.length){
+				datosfinales[i][0]=matrizAagregar[i-matrizInicial.length][0];
+			}
+		}
+		return datosfinales;
+	}
+
+
+
 
 }
