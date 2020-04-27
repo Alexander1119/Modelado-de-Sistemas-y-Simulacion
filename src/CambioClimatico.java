@@ -17,48 +17,107 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 public class CambioClimatico {
-    public static void main(String[] args)
-    {
-        try
-        {
-            FileInputStream file = new FileInputStream(new File("Hello.xlsx"));
+    public static void main(String[] args) {
 
-            //Create Workbook instance holding reference to .xlsx file
-            XSSFWorkbook workbook = new XSSFWorkbook(file);
 
-            //Get first/desired sheet from the workbook
-            XSSFSheet sheet = workbook.getSheetAt(0);
+    String fileName = "Hello.xlsx";
+    //CreateExcel(fileName, data);
+    ReadExcel(fileName);
+    //OverwriteExcel(fileName, data);
+    }
 
-            //Iterate through each rows one by one
-            Iterator<Row> rowIterator = sheet.iterator();
-            while (rowIterator.hasNext())
-            {
-                Row row = rowIterator.next();
-                //For each row, iterate through all the columns
-                Iterator<Cell> cellIterator = row.cellIterator();
+    private static void CreateExcel(String fileName, String[] data) {
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("Hoja prueba");
 
-                while (cellIterator.hasNext())
-                {
-                    Cell cell = cellIterator.next();
-                    //Check the cell type and format accordingly
-//                    switch (cell.getCellType())
-//                    {
-//                        case Cell.CELL_TYPE_NUMERIC:
-//                            System.out.print(cell.getNumericCellValue() + "t");
-//                            break;
-//                        case Cell.CELL_TYPE_STRING:
-//                            System.out.print(cell.getStringCellValue() + "t");
-//                            break;
-//                    }
-                    System.out.print(cell.getStringCellValue());
+        for (int j = 0; j < 2; j++) {// 2 por el Encabezado y la linea de informacion
+            XSSFRow row = sheet.createRow(j);
+            for (int i = 0; i < data.length; i++) {// Tantos loops como info en el arreglo
+                XSSFCell cell = row.createCell(i);
+                if (j == 0) {
+                    cell.setCellValue("#" + i);
+                } else {
+                    cell.setCellValue(data[i]);
                 }
-                System.out.println("");
             }
-            file.close();
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
+
+        try {
+            FileOutputStream fos = null;
+            File file;
+
+            file = new File(fileName);
+            fos = new FileOutputStream(file);
+
+            workbook.write(fos);
+            workbook.close();
+            fos.close();
+            System.out.println("Finalizado");
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void ReadExcel(String fileName) {
+        try {
+            InputStream myFile = new FileInputStream(new File(fileName));
+            XSSFWorkbook wb = new XSSFWorkbook(myFile);
+            XSSFSheet sheet = wb.getSheetAt(0);
+
+            XSSFCell cell;
+            XSSFRow row;
+
+            System.out.println("Apunto de entrar a loops");
+
+            System.out.println("" + sheet.getLastRowNum());
+
+            for (int i = 0; i < sheet.getLastRowNum() + 1; i++) {
+                row = sheet.getRow(i);
+                for (int j = 0; j < row.getLastCellNum(); j++) {
+                    cell = row.getCell(j);
+                    System.out.println("Valor: " + cell.toString());
+                }
+            }
+            System.out.println("Finalizado");
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void OverwriteExcel(String fileName, String[] data) {
+        try {
+            InputStream inp = new FileInputStream(new File(fileName));
+            XSSFWorkbook oldWorkbook = new XSSFWorkbook(inp);
+
+            XSSFSheet oldSheet = oldWorkbook.getSheetAt(0);
+
+            XSSFRow oldRow;
+
+            oldRow = oldSheet.createRow(oldSheet.getLastRowNum() + 1);
+            for (int i = 0; i < data.length; i++) {// Tantos loops como info en el arreglo
+                XSSFCell cell = oldRow.createCell(i);
+                cell.setCellValue(data[i]);
+            }
+
+            FileOutputStream fos = null;
+            File file;
+
+            file = new File(fileName);
+            fos = new FileOutputStream(file);
+
+            oldWorkbook.write(fos);
+            oldWorkbook.close();
+            fos.close();
+
+            System.out.println("Finalizado");
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println(e.getMessage());
         }
     }
 }
