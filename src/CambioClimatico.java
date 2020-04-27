@@ -50,7 +50,7 @@ public class CambioClimatico {
 //                            System.out.print(cell.getStringCellValue() + "t");
 //                            break;
 //                    }
-                    System.out.print(cell.getStringCellValue() + "t");
+                    System.out.print(cell.getStringCellValue());
                 }
                 System.out.println("");
             }
