@@ -1,26 +1,18 @@
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.util.Iterator;
-import java.util.Scanner;
+
 
 public class CambioClimatico {
     public static void main(String[] args) {
+    Double Y1,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,x19;
 
-
-    String fileName = "Hello.xlsx";
+    String fileName = "datos.xlsx";
     //CreateExcel(fileName, data);
     ReadExcel(fileName);
     //OverwriteExcel(fileName, data);
@@ -73,9 +65,9 @@ public class CambioClimatico {
 
             System.out.println("" + sheet.getLastRowNum());
 
-            for (int i = 0; i < sheet.getLastRowNum() + 1; i++) {
+            for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
                 row = sheet.getRow(i);
-                for (int j = 0; j < row.getLastCellNum(); j++) {
+                for (int j = 1; j < row.getLastCellNum(); j++) {
                     cell = row.getCell(j);
                     System.out.println("Valor: " + cell.toString());
                 }
