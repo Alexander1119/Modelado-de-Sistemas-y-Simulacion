@@ -6,28 +6,34 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.util.Vector;
+
 
 
 public class CambioClimatico {
 
 
     public static void main(String[] args) {
-    Double [][]Y1;
+    Double [][]Y;
     Double [][]x;
 
 
 
     String fileName = "datos.xlsx";
     //CreateExcel(fileName, data);
-    Y1=ReadExcel(fileName,20,42,1);
-    x=ReadExcel(fileName,1,42,19);
-    for (int i=0;i<  x.length;i++){
-        for (int j=0;j<x[0].length;j++){
-            System.out.print(x[i][j]+" ");
+    Y=ReadExcel(fileName,2,42,1);
+    x=ReadExcel(fileName,0,42,19);
+        for (int i=0;i<  x.length;i++){
+            for (int j=0;j<x[0].length;j++){
+                System.out.print(x[i][j]+" ");
+            }
+            System.out.println();
         }
-        System.out.println();
-    }
+//    for (int i=0;i<  Y.length;i++){
+//        for (int j=0;j<Y[0].length;j++){
+//            System.out.print(Y[i][j]+" ");
+//        }
+//        System.out.println();
+//    }
 
     //OverwriteExcel(fileName, data);
     }
