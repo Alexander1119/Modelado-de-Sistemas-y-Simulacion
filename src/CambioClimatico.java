@@ -6,15 +6,29 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.Vector;
 
 
 public class CambioClimatico {
+
+
     public static void main(String[] args) {
-    Double Y1,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,x19;
+    Double [][]Y1;
+    Double [][]x;
+
+
 
     String fileName = "datos.xlsx";
     //CreateExcel(fileName, data);
-    ReadExcel(fileName);
+    Y1=ReadExcel(fileName,20,42,1);
+    x=ReadExcel(fileName,1,42,19);
+    for (int i=0;i<  x.length;i++){
+        for (int j=0;j<x[0].length;j++){
+            System.out.print(x[i][j]+" ");
+        }
+        System.out.println();
+    }
+
     //OverwriteExcel(fileName, data);
     }
 
@@ -52,11 +66,15 @@ public class CambioClimatico {
         }
     }
 
-    private static void ReadExcel(String fileName) {
+    private static Double[][] ReadExcel(String fileName,int k,int m,int n){
+        Double[][] Y1 = new Double[m][n];
+
         try {
             InputStream myFile = new FileInputStream(new File(fileName));
             XSSFWorkbook wb = new XSSFWorkbook(myFile);
-            XSSFSheet sheet = wb.getSheetAt(0);
+
+
+            XSSFSheet sheet = wb.getSheetAt(k);
 
             XSSFCell cell;
             XSSFRow row;
@@ -65,11 +83,13 @@ public class CambioClimatico {
 
             System.out.println("" + sheet.getLastRowNum());
 
-            for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
+            for (int i = 0; i < sheet.getLastRowNum() + 1; i++) {
                 row = sheet.getRow(i);
-                for (int j = 1; j < row.getLastCellNum(); j++) {
+                for (int j = 0; j < row.getLastCellNum(); j++) {
                     cell = row.getCell(j);
-                    System.out.println("Valor: " + cell.toString());
+                    Y1[i][j] = cell.getNumericCellValue();
+
+//                    System.out.println("Valor: " + cell.getNumericCellValue());
                 }
             }
             System.out.println("Finalizado");
@@ -78,6 +98,7 @@ public class CambioClimatico {
             // TODO: handle exception
             System.out.println(e.getMessage());
         }
+        return Y1;
     }
 
     private static void OverwriteExcel(String fileName, String[] data) {
