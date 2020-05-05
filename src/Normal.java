@@ -17,19 +17,19 @@ public class Normal {
         double ax=(6*sig)/100;
 
 //        for (int j=0;j<100;j++){
-            double rand=Math.random();
-            double sum =0;
-
-            double i=0;
-
-
-            while(sum<rand) {
-
-                sum=sum+ax*(Math.pow(2*Math.PI*sig*sig, -0.5)*Math.exp(-0.5*Math.pow((i*ax-media)/sig, 2)));
-                i++;
-
-            }
-            System.out.println(i*ax);
+//            double rand=Math.random();
+//            double sum =0;
+//
+//            double i=0;
+//
+//
+//            while(sum<rand) {
+//
+//                sum=sum+ax*(Math.pow(2*Math.PI*sig*sig, -0.5)*Math.exp(-0.5*Math.pow((i*ax-media)/sig, 2)));
+//                i++;
+//
+//            }
+//            System.out.println(i*ax);
 //            datos[j]=i*ax;
 //
 //        }
@@ -55,9 +55,9 @@ public class Normal {
 
         land =entra.nextDouble();
 
-        double[][] ve=new double[100][1];
+        double[][] ve=new double[100][0];
         for (int j=0; j<100;j++){
-            double rand1 = (Math.random());
+            double rand = (Math.random());
             ve[j][0]=-land*Math.log(1-rand);
 
         }
@@ -73,7 +73,7 @@ public class Normal {
         JFreeChart grafic = null;
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
         for(int j=0;j<ve.length;j++){
-            datos.addValue(ve[j][0],"Grafica 1","a"+i);
+            datos.addValue(ve[j][0],"Grafica 1","a"+j);
         }
         grafic = ChartFactory.createBarChart("Grafico 1","Eje X","Eje Y",datos, PlotOrientation.VERTICAL,true,true,false);
         ChartPanel cPanel = new ChartPanel(grafic);
